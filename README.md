@@ -1,3 +1,4 @@
+
 # Omnibus Solutions — Website
 
 A static, multi-page marketing site for Omnibus Solutions, a company that offers two things under one roof: **custom software / digital services** and **HR consultancy / job-ready talent acquisition**. The design treats that duality as the core idea rather than hiding it — see "Design concept" below.
