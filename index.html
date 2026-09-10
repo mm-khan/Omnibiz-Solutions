@@ -940,6 +940,29 @@
     gap:8px;
   }
 
+  /* ============ Clickable contact links ============ */
+  .lead-contact .contact-link{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    color:rgba(255,255,255,0.85);
+    text-decoration:none;
+    font-size:14.5px;
+    transition:transform .25s ease, color .25s ease;
+  }
+  .lead-contact a.contact-link{cursor:pointer;}
+  .lead-contact a.contact-link:hover{color:#fff;transform:translateX(4px);}
+  .lead-contact .contact-link span{line-height:1.6;}
+  .footer-contact li a{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    color:rgba(255,255,255,0.6);
+    text-decoration:none;
+    transition:transform .25s ease, color .25s ease;
+  }
+  .footer-contact li a:hover{color:var(--cyan);transform:translateX(4px);}
+
   /* ============ Footer ============ */
   footer{
     background:var(--deep-blue);
@@ -1446,9 +1469,18 @@
           <p>Whether you're scaling engineering capacity or hiring your next team member, Omnibiz Solutions is one message away.</p>
         </div>
         <div class="lead-contact">
-          <div><i class="fa-solid fa-envelope"></i> omnibizsolutions.in@gmail.com</div>
-          <div><i class="fa-solid fa-phone"></i> +91 9665134275</div>
-          <div><i class="fa-solid fa-location-dot"></i> 1st Floor, Omnibiz Tech Park, Sector 17, Anjuman Colony Balapur District Akola, Maharashtra 444302, INDIA</div>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=omnibizsolutions.in@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Email Omnibiz Solutions">
+            <i class="fa-solid fa-envelope"></i>
+            <span>Email Us</span>
+          </a>
+          <a href="tel:+919665134275" class="contact-link" aria-label="Call Omnibiz Solutions">
+            <i class="fa-solid fa-phone"></i>
+            <span>Call Us</span>
+          </a>
+          <div class="contact-link">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Sadar Nagpur 440001, INDIA</span>
+          </div>
         </div>
       </div>
 
@@ -1545,9 +1577,20 @@
       <div class="footer-col">
         <h5>Contact</h5>
         <ul class="footer-contact">
-          <li><i class="fa-solid fa-envelope"></i> omnibizsolutions.in@gmail.com</li>
-          <li><i class="fa-solid fa-phone"></i> +91 9665134275</li>
-          <li><i class="fa-solid fa-location-dot"></i> 1st Floor, Omnibiz Tech Park, Sector 17, Anjuman Colony Balapur District Akola, Maharashtra 444302, INDIA</li>
+          <li>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=omnibizsolutions.in@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email Omnibiz Solutions">
+              <i class="fa-solid fa-envelope"></i><span>Email Us</span>
+            </a>
+          </li>
+          <li>
+            <a href="tel:+919665134275" aria-label="Call Omnibiz Solutions">
+              <i class="fa-solid fa-phone"></i><span>Call Us</span>
+            </a>
+          </li>
+          <li>
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Sadar Nagpur 440001, INDIA</span>
+          </li>
         </ul>
       </div>
     </div>
