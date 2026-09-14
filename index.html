@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="Omnibiz Solutions — HR Consulting & Recruitment. Job-ready talent, rigorous screening and success-based hiring solutions.">
+    <title>Omnibiz Solutions | HR Consulting & Recruitment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = {theme: {extend: {colors: {navy: "#0f172a", gold: "#d97706", teal: "#0d9488"}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            background: #f8fafc;
+            color: #0f172a;
+            font-family: Inter, sans-serif;
+            overflow-x: hidden
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Plus Jakarta Sans", sans-serif
+        }
+
+        .nav {
+            background: #f8fafccc;
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid transparent;
+            transition: .3s
+        }
+
+        .nav.scrolled {
+            background: #f8fafaf5;
+            border-color: #0f172a12;
+            box-shadow: 0 12px 35px #0f172a12
+        }
+
+        .gridbg {
+            background-image: linear-gradient(#0f172a08 1px, transparent 1px), linear-gradient(90deg, #0f172a08 1px, transparent 1px);
+            background-size: 46px 46px;
+            mask-image: linear-gradient(#000 15%, transparent 88%)
+        }
+
+        .card {
+            background: #ffffffd9;
+            border: 1px solid #0f172a12;
+            box-shadow: 0 16px 50px #0f172a0f;
+            transition: .35s
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: #d9770659;
+            box-shadow: 0 25px 65px #0f172a1f
+        }
+
+        .btn {
+            position: relative;
+            overflow: hidden;
+            transition: .25s
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 35px #0f172a38
+        }
+
+        .input {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #0f172a1c;
+            background: #fff;
+            border-radius: 14px;
+            padding: 14px 15px;
+            outline: 0;
+            transition: .2s
+        }
+
+        .input:focus {
+            border-color: #0d9488a8;
+            box-shadow: 0 0 0 4px #0d948814
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px)
+        }
+
+        .ring {
+            position: fixed;
+            z-index: 9999;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #d97706aa;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: .2s
+        }
+
+        .ring.active {
+            width: 52px;
+            height: 52px;
+            border-color: #0d9488bf;
+            background: #0d94880a
+        }
+
+        .step.active {
+            border-color: #0d94887a;
+            background: #ffffff0f;
+            box-shadow: 0 15px 45px #0d94881f
+        }
+
+        @media(max-width:768px) {
+            .ring {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ring" class="ring"></div>
+
+    <header id="nav" class="nav fixed top-0 inset-x-0 z-50">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#home" class="interactive"><img src="assets/omnibiz-solutions-logo.png" alt="Omnibiz Solutions"
+                    class="w-52 h-auto max-h-16 object-contain"></a>
+            <nav class="hidden lg:flex gap-8 text-sm font-bold text-slate-600">
+                <a class="interactive hover:text-navy" href="#about">About</a><a class="interactive hover:text-navy"
+                    href="#services">Services</a><a class="interactive hover:text-navy" href="#process">Screening
+                    Process</a><a class="interactive hover:text-navy" href="#why">Why Us</a><a
+                    class="interactive hover:text-navy" href="#contact">Contact</a>
+            </nav>
+            <a href="#contact"
+                class="btn interactive hidden lg:inline-flex items-center gap-2 rounded-full bg-navy text-white px-5 py-3 text-sm font-bold">Hire
+                Talent <i data-lucide="arrow-up-right" class="w-4"></i></a>
+            <button id="menu" class="lg:hidden p-2 border rounded-xl interactive" aria-label="Menu"><i
+                    data-lucide="menu"></i></button>
+        </div>
+        <div id="mobile" class="hidden max-w-7xl mx-auto px-5 pb-5 lg:hidden flex-col gap-1">
+            <a href="#about" class="p-3 rounded-xl font-bold">About</a><a href="#services"
+                class="p-3 rounded-xl font-bold">Services</a><a href="#process"
+                class="p-3 rounded-xl font-bold">Screening Process</a><a href="#why"
+                class="p-3 rounded-xl font-bold">Why Us</a><a href="#contact"
+                class="p-3 rounded-xl bg-navy text-white font-bold">Hire Talent</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="relative min-h-screen pt-32 pb-20 flex items-center overflow-hidden">
+            <div class="gridbg absolute inset-0"></div>
+            <div class="absolute -right-32 top-32 w-96 h-96 rounded-full bg-amber-200/30 blur-3xl"></div>
+            <div class="absolute -left-32 bottom-0 w-80 h-80 rounded-full bg-teal-200/30 blur-3xl"></div>
+            <div
+                class="max-w-7xl mx-auto px-5 lg:px-8 w-full relative z-10 grid lg:grid-cols-[1.1fr_.9fr] gap-14 items-center">
+                <div class="reveal"><span
+                        class="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/80 px-4 py-2 text-xs font-extrabold text-amber-700"><b
+                            class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></b>HR CONSULTING &
+                        RECRUITMENT</span>
+                    <h1 class="text-5xl md:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.03] mt-7">
+                        Empowering Businesses with <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-amber-800">Job-Ready
+                            Talent.</span></h1>
+                    <p class="mt-7 max-w-2xl text-lg md:text-xl leading-8 text-slate-600">Omnibiz Solutions delivers
+                        100% pre-screened, interviewed, and qualified candidates tailored precisely to your hiring
+                        requirements.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 mt-9"><a href="#contact"
+                            class="btn interactive inline-flex justify-center items-center gap-3 rounded-full bg-navy text-white px-7 py-4 font-bold">Request
+                            Talent <i data-lucide="arrow-right" class="w-5"></i></a><a href="#process"
+                            class="interactive inline-flex justify-center items-center gap-3 rounded-full border bg-white/80 px-7 py-4 font-bold">View
+                            Screening Process <i data-lucide="route" class="w-5"></i></a></div>
+                    <div class="grid sm:grid-cols-3 gap-3 mt-9">
+                        <div class="card rounded-2xl p-4"><small class="font-bold text-slate-500">COMMERCIAL
+                                MODEL</small><b class="block mt-1">Zero Upfront Cost</b></div>
+                        <div class="card rounded-2xl p-4"><small class="font-bold text-slate-500">REPLACEMENT</small><b
+                                class="block mt-1">60-Day Guarantee</b></div>
+                        <div class="card rounded-2xl p-4"><small class="font-bold text-slate-500">TURNAROUND</small><b
+                                class="block mt-1">48-Hr Shortlist</b></div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="card rounded-[2rem] p-6 md:p-8">
+                        <div class="flex justify-between items-center mb-7">
+                            <div>
+                                <p class="text-sm font-bold text-slate-500">Talent Delivery</p>
+                                <h2 class="text-2xl font-extrabold mt-1">Quality before quantity.</h2>
+                            </div><span
+                                class="w-12 h-12 rounded-2xl bg-navy text-white flex items-center justify-center"><i
+                                    data-lucide="badge-check"></i></span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex gap-4 items-center rounded-2xl bg-slate-50 border p-4"><i
+                                    data-lucide="search-check" class="text-teal-700"></i>
+                                <div><b>Requirement Analysis</b>
+                                    <p class="text-sm text-slate-500">Role, skills, culture & expectations</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-center rounded-2xl bg-slate-50 border p-4"><i
+                                    data-lucide="users" class="text-amber-700"></i>
+                                <div><b>Targeted Sourcing</b>
+                                    <p class="text-sm text-slate-500">Relevant talent, not random CVs</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-center rounded-2xl bg-slate-50 border p-4"><i
+                                    data-lucide="scan-search" class="text-teal-700"></i>
+                                <div><b>Interview & Vetting</b>
+                                    <p class="text-sm text-slate-500">Skills, communication & fit assessed</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-center rounded-2xl bg-slate-50 border p-4"><i
+                                    data-lucide="send" class="text-amber-700"></i>
+                                <div><b>Curated Profiles</b>
+                                    <p class="text-sm text-slate-500">Decision-ready candidates delivered</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 rounded-2xl bg-navy text-white p-5 flex gap-4"><i data-lucide="shield-check"
+                                class="text-amber-400"></i>
+                            <div><b>Built for hiring confidence</b>
+                                <p class="text-sm text-slate-300 mt-1">Structured recruitment designed to reduce
+                                    screening workload.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-14 items-center">
+                <div class="reveal">
+                    <p class="text-sm font-extrabold uppercase tracking-widest text-amber-700">About Omnibiz</p>
+                    <div class="w-14 h-1 bg-amber-600 rounded-full mt-4 mb-6"></div>
+                    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Recruitment built around your actual
+                        hiring needs.</h2>
+                    <p class="mt-6 text-slate-600 leading-8">Omnibiz Solutions is an HR consulting and recruitment
+                        partner focused on helping businesses access qualified, screened and interview-ready talent.</p>
+                    <p class="mt-4 text-slate-600 leading-8">We combine structured requirement analysis, targeted
+                        sourcing, preliminary assessment and curated candidate presentation so your team can spend more
+                        time making hiring decisions and less time filtering applications.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4 reveal">
+                    <div class="card rounded-3xl p-6"><i data-lucide="crosshair" class="text-amber-700"></i>
+                        <h3 class="text-xl font-extrabold mt-5">Precision Hiring</h3>
+                        <p class="text-sm text-slate-500 mt-2 leading-6">Sourcing aligned to role, experience, skills
+                            and hiring context.</p>
+                    </div>
+                    <div class="card rounded-3xl p-6"><i data-lucide="shield-check" class="text-teal-700"></i>
+                        <h3 class="text-xl font-extrabold mt-5">Quality First</h3>
+                        <p class="text-sm text-slate-500 mt-2 leading-6">Candidates are evaluated before profiles reach
+                            your hiring team.</p>
+                    </div>
+                    <div class="card rounded-3xl p-6"><i data-lucide="handshake" class="text-amber-700"></i>
+                        <h3 class="text-xl font-extrabold mt-5">Partner Mindset</h3>
+                        <p class="text-sm text-slate-500 mt-2 leading-6">Focused on communication, responsiveness and
+                            relationships.</p>
+                    </div>
+                    <div class="card rounded-3xl p-6"><i data-lucide="circle-dollar-sign" class="text-teal-700"></i>
+                        <h3 class="text-xl font-extrabold mt-5">Success-Based</h3>
+                        <p class="text-sm text-slate-500 mt-2 leading-6">Transparent model designed around successful
+                            hiring outcomes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why" class="py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-5 lg:px-8">
+                <div class="max-w-3xl reveal">
+                    <p class="text-sm font-extrabold uppercase tracking-widest text-teal-700">Why Choose Us</p>
+                    <div class="w-14 h-1 bg-amber-600 rounded-full mt-4 mb-6"></div>
+                    <h2 class="text-4xl md:text-5xl font-extrabold">Less CV filtering. More confident hiring.</h2>
+                    <p class="mt-5 text-slate-600 leading-8">A practical model designed to make recruitment focused,
+                        transparent and efficient.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+                    <div class="card rounded-3xl p-7 reveal"><b class="text-amber-700">01</b><i
+                            data-lucide="file-check-2" class="block mt-7"></i>
+                        <h3 class="text-xl font-extrabold mt-5">Rigorous Pre-Screening & Skill Vetting</h3>
+                        <p class="text-sm text-slate-500 mt-3 leading-6">Structured preliminary checks help surface
+                            better-matched candidates.</p>
+                    </div>
+                    <div class="card rounded-3xl p-7 reveal"><b class="text-amber-700">02</b><i data-lucide="target"
+                            class="block mt-7"></i>
+                        <h3 class="text-xl font-extrabold mt-5">Customized Talent Sourcing</h3>
+                        <p class="text-sm text-slate-500 mt-3 leading-6">Search strategy adapts to role, industry,
+                            seniority and requirements.</p>
+                    </div>
+                    <div class="card rounded-3xl p-7 reveal"><b class="text-amber-700">03</b><i
+                            data-lucide="circle-dollar-sign" class="block mt-7"></i>
+                        <h3 class="text-xl font-extrabold mt-5">Success-Based Commercial Model</h3>
+                        <p class="text-sm text-slate-500 mt-3 leading-6">Pay only upon hire under the agreed recruitment
+                            terms.</p>
+                    </div>
+                    <div class="card rounded-3xl p-7 reveal"><b class="text-amber-700">04</b><i data-lucide="headphones"
+                            class="block mt-7"></i>
+                        <h3 class="text-xl font-extrabold mt-5">Dedicated Account Management</h3>
+                        <p class="text-sm text-slate-500 mt-3 leading-6">A clear communication point keeps your hiring
+                            workflow moving.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-5 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto reveal">
+                    <p class="text-sm font-extrabold uppercase tracking-widest text-amber-700">Our Services</p>
+                    <div class="w-14 h-1 bg-amber-600 rounded-full mx-auto mt-4 mb-6"></div>
+                    <h2 class="text-4xl md:text-5xl font-extrabold">Recruitment solutions for every hiring challenge.
+                    </h2>
+                    <p class="mt-5 text-slate-600 leading-8">From critical leadership roles to volume hiring, services
+                        can be shaped around your requirements.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 mt-12">
+                    <div class="card rounded-[2rem] p-8 reveal"><i data-lucide="briefcase-business"
+                            class="text-amber-700"></i>
+                        <h3 class="text-2xl font-extrabold mt-7">Permanent Staffing Solutions</h3>
+                        <p class="text-slate-500 leading-7 mt-3">End-to-end recruitment support for permanent positions
+                            across functions and experience levels.</p><a href="#contact"
+                            class="interactive inline-flex gap-2 mt-6 font-bold">Discuss a role <i
+                                data-lucide="arrow-up-right" class="w-4"></i></a>
+                    </div>
+                    <div class="card rounded-[2rem] p-8 reveal"><i data-lucide="crown" class="text-teal-700"></i>
+                        <h3 class="text-2xl font-extrabold mt-7">Executive Search & Leadership Hiring</h3>
+                        <p class="text-slate-500 leading-7 mt-3">Focused search and assessment support for senior,
+                            specialist and leadership requirements.</p><a href="#contact"
+                            class="interactive inline-flex gap-2 mt-6 font-bold">Discuss a role <i
+                                data-lucide="arrow-up-right" class="w-4"></i></a>
+                    </div>
+                    <div class="card rounded-[2rem] p-8 reveal"><i data-lucide="layers-3" class="text-slate-700"></i>
+                        <h3 class="text-2xl font-extrabold mt-7">Volume & Niche Hiring</h3>
+                        <p class="text-slate-500 leading-7 mt-3">Flexible support for high-volume recruitment and
+                            hard-to-find niche profiles.</p><a href="#contact"
+                            class="interactive inline-flex gap-2 mt-6 font-bold">Discuss a role <i
+                                data-lucide="arrow-up-right" class="w-4"></i></a>
+                    </div>
+                    <div class="card rounded-[2rem] p-8 reveal"><i data-lucide="clipboard-check"
+                            class="text-amber-700"></i>
+                        <h3 class="text-2xl font-extrabold mt-7">Candidate Screening & Technical Assessment</h3>
+                        <p class="text-slate-500 leading-7 mt-3">Preliminary interviews and skill-focused assessments to
+                            help teams evaluate candidates faster.</p><a href="#contact"
+                            class="interactive inline-flex gap-2 mt-6 font-bold">Discuss a role <i
+                                data-lucide="arrow-up-right" class="w-4"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="py-24 bg-navy text-white">
+            <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-[.8fr_1.2fr] gap-14">
+                <div class="reveal">
+                    <p class="text-sm font-extrabold uppercase tracking-widest text-amber-400">Screening Process</p>
+                    <div class="w-14 h-1 bg-amber-600 rounded-full mt-4 mb-6"></div>
+                    <h2 class="text-4xl md:text-5xl font-extrabold">A five-step workflow designed for hiring clarity.
+                    </h2>
+                    <p class="mt-6 text-slate-300 leading-8">Click a step to see how we structure the journey from
+                        requirement to post-placement support.</p><a href="#contact"
+                        class="interactive inline-flex items-center gap-3 mt-8 rounded-full bg-white text-navy px-6 py-4 font-bold">Start
+                        a Hiring Conversation <i data-lucide="arrow-right" class="w-5"></i></a>
+                </div>
+                <div class="reveal space-y-3">
+                    <button
+                        class="step active interactive w-full text-left rounded-2xl border border-white/10 p-5 flex gap-5"
+                        data-title="Detailed Requirement Analysis"
+                        data-text="We understand the role, responsibilities, must-have skills, experience, culture and hiring expectations before sourcing begins."><b
+                            class="text-amber-400">01</b><span><strong class="block">Detailed Requirement
+                                Analysis</strong><small class="text-slate-400">We start by understanding what success
+                                looks like.</small></span></button>
+                    <button class="step interactive w-full text-left rounded-2xl border border-white/10 p-5 flex gap-5"
+                        data-title="Targeted Talent Sourcing"
+                        data-text="We use targeted sourcing approaches to identify candidates relevant to the role rather than simply increasing application volume."><b
+                            class="text-amber-400">02</b><span><strong class="block">Targeted Talent
+                                Sourcing</strong><small class="text-slate-400">Relevant talent aligned to your
+                                requirement.</small></span></button>
+                    <button class="step interactive w-full text-left rounded-2xl border border-white/10 p-5 flex gap-5"
+                        data-title="In-Depth Preliminary Interview & Assessment"
+                        data-text="Candidates go through preliminary interview and assessment stages to evaluate communication, skills, experience and overall fit."><b
+                            class="text-amber-400">03</b><span><strong class="block">In-Depth Preliminary Interview &
+                                Assessment</strong><small class="text-slate-400">Skills, communication and fit are
+                                assessed.</small></span></button>
+                    <button class="step interactive w-full text-left rounded-2xl border border-white/10 p-5 flex gap-5"
+                        data-title="Curated Profile Presentation"
+                        data-text="Only relevant profiles are presented to the client with clear candidate information to support faster evaluation."><b
+                            class="text-amber-400">04</b><span><strong class="block">Curated Profile
+                                Presentation</strong><small class="text-slate-400">Decision-ready candidate
+                                profiles.</small></span></button>
+                    <button class="step interactive w-full text-left rounded-2xl border border-white/10 p-5 flex gap-5"
+                        data-title="Onboarding & Post-Placement Support"
+                        data-text="We remain engaged through the hiring journey and provide post-placement support in line with the agreed recruitment terms."><b
+                            class="text-amber-400">05</b><span><strong class="block">Onboarding & Post-Placement
+                                Support</strong><small class="text-slate-400">Support beyond the offer
+                                stage.</small></span></button>
+                    <div class="rounded-2xl bg-white/5 border border-white/10 p-6 mt-5"><small
+                            class="uppercase tracking-widest text-teal-300 font-bold">Selected step</small>
+                        <h3 id="stepTitle" class="text-2xl font-extrabold mt-2">Detailed Requirement Analysis</h3>
+                        <p id="stepText" class="text-slate-300 leading-7 mt-3">We understand the role, responsibilities,
+                            must-have skills, experience, culture and hiring expectations before sourcing begins.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 card rounded-[2rem] p-8 md:p-10 reveal">
+                    <div class="flex gap-5"><i data-lucide="shield" class="text-teal-700 w-10 shrink-0"></i>
+                        <div>
+                            <p class="text-sm font-extrabold uppercase tracking-widest text-teal-700">Client Guarantee
+                            </p>
+                            <h2 class="text-3xl md:text-4xl font-extrabold mt-3">60-Day Free Replacement Guarantee.</h2>
+                            <p class="mt-4 text-slate-600 leading-7">Where applicable under the agreed recruitment
+                                terms, Omnibiz Solutions provides a 60-day free replacement guarantee to support hiring
+                                confidence.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card rounded-[2rem] p-8 reveal"><i data-lucide="file-signature" class="text-amber-700"></i>
+                    <h3 class="text-2xl font-extrabold mt-5">Transparent Terms</h3>
+                    <p class="text-slate-500 leading-7 mt-3">Clear commercial terms, confidentiality expectations,
+                        non-disclosure compliance and commitment to candidate quality.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-[.8fr_1.2fr] gap-12">
+                <div class="reveal">
+                    <p class="text-sm font-extrabold uppercase tracking-widest text-amber-700">Let's Talk</p>
+                    <div class="w-14 h-1 bg-amber-600 rounded-full mt-4 mb-6"></div>
+                    <h2 class="text-4xl md:text-5xl font-extrabold">Tell us what you need to hire.</h2>
+                    <p class="mt-5 text-slate-600 leading-8">Share your hiring requirement and our team can discuss the
+                        right recruitment approach with you.</p>
+                    <div class="space-y-3 mt-8"><a href="tel:+919665134275" aria-label="Contact Omnibiz Solutions"
+                            class="interactive card rounded-2xl p-5 flex gap-4"><i data-lucide="phone"></i><span><small
+                                    class="block text-slate-500">Contact</small><strong>Contact Us</strong></span></a>
+                        <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=contact%40omnibizsolutions.in"
+                            target="_blank" rel="noopener noreferrer"
+                            class="interactive card rounded-2xl p-5 flex gap-4" aria-label="Email Omnibiz Solutions">
+                            <i data-lucide="mail" class="text-amber-700"></i>
+                            <span>
+                                <small class="block text-slate-500">Email</small>
+                                <strong>Contact Us</strong>
+                            </span>
+                        </a>
+                        <div class="card rounded-2xl p-5 flex gap-4"><i data-lucide="clock-3"
+                                class="text-teal-700"></i><span><small class="block text-slate-500">Office
+                                    Hours</small><strong>Mon-Sat | 9:00 AM - 6:00 PM IST</strong></span></div>
+                    </div>
+                </div>
+                <div class="card rounded-[2rem] p-6 md:p-8 reveal">
+                    <form id="form" action="https://formspree.io/f/mgawybbn" method="POST" class="space-y-5"
+                        aria-label="Omnibiz Solutions hiring inquiry form">
+                        <div class="grid md:grid-cols-2 gap-5"><label class="text-sm font-bold">Name<input
+                                    class="input mt-2" name="name" required placeholder="Your full name"></label><label
+                                class="text-sm font-bold">Company Name<input class="input mt-2" name="company" required
+                                    placeholder="Company name"></label></div>
+                        <div class="grid md:grid-cols-2 gap-5"><label class="text-sm font-bold">Work Email<input
+                                    class="input mt-2" type="email" name="email" required
+                                    placeholder="you@company.com"></label><label class="text-sm font-bold">Phone
+                                Number<input class="input mt-2" type="tel" name="phone" required
+                                    placeholder="+91"></label></div>
+                        <label class="text-sm font-bold">Hiring Requirement<select class="input mt-2" name="requirement"
+                                required>
+                                <option value="">Select requirement</option>
+                                <option>Permanent Staffing Solutions</option>
+                                <option>Executive Search & Leadership Hiring</option>
+                                <option>Volume & Niche Hiring</option>
+                                <option>Candidate Screening & Technical Assessment</option>
+                                <option>Other</option>
+                            </select></label>
+                        <label class="text-sm font-bold">Message<textarea class="input mt-2 min-h-36" name="message"
+                                required
+                                placeholder="Tell us about the roles, skills, experience and expected timeline..."></textarea></label>
+                        <button
+                            class="btn interactive w-full rounded-2xl bg-navy text-white px-6 py-4 font-bold flex justify-center gap-3"
+                            type="submit">Submit Hiring Inquiry <i data-lucide="arrow-right"></i></button>
+                        <p id="status" class="hidden text-center text-sm font-bold"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-navy text-white">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div><img src="assets/omnibiz-solutions-logo.png" alt="Omnibiz Solutions"
+                    class="w-56 h-auto max-h-20 object-contain bg-white rounded-xl px-3 py-1">
+                <p class="text-slate-400 text-sm leading-6 mt-5">HR Consulting & Recruitment focused on qualified,
+                    screened and job-ready talent.</p>
+            </div>
+            <div>
+                <h3 class="font-bold">Quick Links</h3>
+                <div class="space-y-3 mt-5 text-sm text-slate-400"><a href="#about"
+                        class="block hover:text-white">About</a><a href="#services"
+                        class="block hover:text-white">Services</a><a href="#process"
+                        class="block hover:text-white">Screening Process</a><a href="#why"
+                        class="block hover:text-white">Why Us</a></div>
+            </div>
+            <div>
+                <h3 class="font-bold">Legal</h3>
+                <div class="space-y-3 mt-5 text-sm text-slate-400"><a href="#" class="block hover:text-white">Privacy
+                        Policy</a><a href="#" class="block hover:text-white">Terms of Service</a></div>
+            </div>
+            <div>
+                <h3 class="font-bold">Connect</h3><a href="https://www.linkedin.com/company/144497038/admin/dashboard/"
+                    aria-label="LinkedIn"
+                    class="interactive mt-5 inline-flex w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 items-center justify-center"><i
+                        data-lucide="linkedin"></i></a>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto px-5 lg:px-8 border-t border-white/10 py-6 text-sm text-slate-500 flex flex-col md:flex-row justify-between">
+            <span>© <span id="year"></span> Omnibiz Solutions. All rights reserved.</span><span>HR Consulting &
+                Recruitment</span>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons(); document.getElementById("year").textContent = new Date().getFullYear();
+        const nav = document.getElementById("nav"); addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 20), {passive: true});
+        const menu = document.getElementById("menu"), mobile = document.getElementById("mobile"); menu.onclick = () => {mobile.classList.toggle("hidden"); mobile.classList.toggle("flex"); lucide.createIcons()}; mobile.querySelectorAll("a").forEach(a => a.onclick = () => mobile.classList.add("hidden"));
+        const ring = document.getElementById("ring"); if (matchMedia("(pointer:fine)").matches) {let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y; onmousemove = e => {x = e.clientX; y = e.clientY; ring.style.opacity = 1}; (function f() {rx += (x - rx) * .18; ry += (y - ry) * .18; ring.style.left = rx + "px"; ring.style.top = ry + "px"; requestAnimationFrame(f)})(); document.querySelectorAll("a,button,input,textarea,select,.interactive").forEach(e => {e.onmouseenter = () => ring.classList.add("active"); e.onmouseleave = () => ring.classList.remove("active")})}
+        const obs = new IntersectionObserver(es => es.forEach(e => {if (e.isIntersecting) {gsap.to(e.target, {opacity: 1, y: 0, duration: .75, ease: "power3.out"}); obs.unobserve(e.target)} }), {threshold: .12}); document.querySelectorAll(".reveal").forEach(e => obs.observe(e));
+        document.querySelectorAll(".step").forEach(b => b.onclick = () => {document.querySelectorAll(".step").forEach(x => x.classList.remove("active")); b.classList.add("active"); document.getElementById("stepTitle").textContent = b.dataset.title; document.getElementById("stepText").textContent = b.dataset.text});
+        document.getElementById("form").onsubmit = async e => {e.preventDefault(); const form = e.target, status = document.getElementById("status"), button = form.querySelector("button[type=submit]"); const data = new FormData(form); data.append("_subject", "New Hiring Inquiry — Omnibiz Solutions"); data.append("_replyto", data.get("email")); button.disabled = true; button.classList.add("opacity-60"); status.className = "text-center text-sm font-bold text-slate-500"; status.textContent = "Sending your inquiry..."; try {const r = await fetch(form.action, {method: "POST", body: data, headers: {Accept: "application/json"}}); if (!r.ok) throw new Error("Submission failed"); form.reset(); status.textContent = "Thank you. Your hiring inquiry has been received."; status.className = "text-center text-sm font-bold text-teal-700"} catch (err) {status.textContent = "We could not send the inquiry right now. Please email contact@omnibizsolutions.in directly."; status.className = "text-center text-sm font-bold text-red-600"} finally {button.disabled = false; button.classList.remove("opacity-60")} };
+        gsap.from("#nav", {y: -25, opacity: 0, duration: .8, ease: "power3.out"});
+    </script>
+</body>
+
+</html>
